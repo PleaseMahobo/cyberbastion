@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberBastion | Incident Response Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #1a365d;
+            --secondary: #2d3748;
+            --accent: #e53e3e;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --success: #38a169;
+            --warning: #d69e2e;
+            --danger: #e53e3e;
+            --urgent: #c53030;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--urgent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-urgent {
+            background-color: var(--urgent);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(197, 48, 48, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(197, 48, 48, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(197, 48, 48, 0);
+            }
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Emergency Banner */
+        .emergency-banner {
+            background-color: var(--urgent);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            margin-top: 70px;
+        }
+        
+        .emergency-banner a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 120px 0 100px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 2rem;
+        }
+        
+        /* Incident Response Process */
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 50px 0;
+        }
+        
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--accent);
+            z-index: 1;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            border: 5px solid white;
+            box-shadow: 0 0 0 3px var(--accent);
+        }
+        
+        .step h3 {
+            margin-bottom: 10px;
+        }
+        
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Case Studies */
+        .case-studies {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .case-studies h2 {
+            color: white;
+        }
+        
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .case-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .case-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .case-type {
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            text-align: center;
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+        }
+        
+        .member-certifications {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .cert-badge {
+            background-color: var(--primary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+        }
+        
+        /* Emergency CTA */
+        .emergency-cta {
+            background: linear-gradient(135deg, var(--urgent) 0%, var(--accent) 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .emergency-cta h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+        
+        .emergency-cta p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .emergency-contact {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-col ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .process-steps::before {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                padding: 20px;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-btns .btn {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 10px;
+            }
+            
+            .emergency-contact {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            section {
+                padding: 60px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                CyberBastion
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#process">Our Process</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#cases">Case Studies</a></li>
+                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="#contact">Emergency Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Emergency Banner -->
+    <div class="emergency-banner">
+        <div class="container">
+            <p><i class="fas fa-exclamation-triangle"></i> <strong>UNDER ACTIVE ATTACK?</strong> Call our 24/7 Emergency Response Line: <a href="tel:+1-555-EMERGENCY">+1 (555) EMERGENCY</a></p>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>24/7 Incident Response Services</h1>
+            <p>When every second counts, our elite cybersecurity experts are ready to contain threats, minimize damage, and restore your operations.</p>
+            <div class="hero-btns">
+                <a href="#contact" class="btn btn-urgent">Emergency Response</a>
+                <a href="#process" class="btn btn-outline">Our Response Process</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Incident Response Process -->
+    <section id="process">
+        <div class="container">
+            <h2>Our Incident Response Process</h2>
+            <p class="text-center" style="max-width: 800px; margin: 0 auto 50px;">We follow a proven methodology to rapidly contain security incidents and restore normal operations with minimal business disruption.</p>
+            
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Preparation & Readiness</h3>
+                    <p>Develop IR plans, playbooks, and conduct tabletop exercises to ensure readiness.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Detection & Analysis</h3>
+                    <p>Identify and validate security incidents through advanced monitoring and threat intelligence.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Containment & Eradication</h3>
+                    <p>Isolate affected systems, remove malicious presence, and prevent further damage.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Recovery & Restoration</h3>
+                    <p>Restore systems to normal operation and verify they are clean and secure.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Post-Incident Activity</h3>
+                    <p>Conduct lessons learned, implement improvements, and provide detailed reporting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2>Comprehensive Incident Response Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-biohazard"></i>
+                    </div>
+                    <h3>Emergency Response</h3>
+                    <p>24/7 immediate response to active security incidents with on-call experts ready to contain threats within minutes.</p>
+                    <a href="#" class="btn btn-outline">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Digital Forensics</h3>
+                    <p>Comprehensive investigation to determine root cause, scope of compromise, and extract actionable intelligence.</p>
+                    <a href="#" class="btn btn-outline">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3>Ransomware Negotiation</h3>
+                    <p>Expert negotiation with threat actors and decryption assistance to restore encrypted data and systems.</p>
+                    <a href="#" class="btn btn-outline">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Legal & Compliance Support</h3>
+                    <p>Guidance on regulatory requirements, breach notifications, and preservation of evidence for legal proceedings.</p>
+                    <a href="#" class="btn btn-outline">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>IR Readiness Assessment</h3>
+                    <p>Evaluate and strengthen your incident response capabilities before an incident occurs.</p>
+                    <a href="#" class="btn btn-outline">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Threat Intelligence Integration</h3>
+                    <p>Leverage global threat intelligence to anticipate attacks and respond more effectively.</p>
+                    <a href="#" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="case-studies" id="cases">
+        <div class="container">
+            <h2>Incident Response Case Studies</h2>
+            <div class="case-grid">
+                <div class="case-card">
+                    <div class="case-header">
+                        <h3>Financial Services Breach</h3>
+                        <span class="case-type">BUSINESS EMAIL COMPROMISE</span>
+                    </div>
+                    <p><strong>Challenge:</strong> Sophisticated BEC attack resulted in unauthorized wire transfers totaling $2.3M.</p>
+                    <p><strong>Response:</strong> Our team traced the attack vector, identified compromised accounts, and worked with financial institutions to recover 92% of funds.</p>
+                    <p><strong>Result:</strong> Full recovery of operations and implementation of advanced authentication controls.</p>
+                </div>
+                <div class="case-card">
+                    <div class="case-header">
+                        <h3>Healthcare Ransomware</h3>
+                        <span class="case-type">RANSOMWARE ATTACK</span>
+                    </div>
+                    <p><strong>Challenge:</strong> Ryuk ransomware encrypted critical patient records and hospital systems, demanding $850,000.</p>
+                    <p><strong>Response:</strong> Containment within 2 hours, system restoration from backups, and negotiation reducing payment by 70%.</p>
+                    <p><strong>Result:</strong> 98% of systems restored within 48 hours with minimal patient care disruption.</p>
+                </div>
+                <div class="case-card">
+                    <div class="case-header">
+                        <h3>Manufacturing Espionage</h3>
+                        <span class="case-type">ADVANCED PERSISTENT THREAT</span>
+                    </div>
+                    <p><strong>Challenge:</strong> State-sponsored APT group infiltrated network and exfiltrated proprietary manufacturing designs.</p>
+                    <p><strong>Response:</strong> Full digital forensics investigation, threat actor attribution, and complete network remediation.</p>
+                    <p><strong>Result:</strong> Eradication of threat actor presence and implementation of advanced detection controls.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team">
+        <div class="container">
+            <h2>Our Incident Response Team</h2>
+            <p class="text-center" style="max-width: 800px; margin: 0 auto 50px;">Our team consists of seasoned cybersecurity professionals with backgrounds in government intelligence, law enforcement, and enterprise security.</p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>Sarah Johnson</h3>
+                    <p>Director of Incident Response</p>
+                    <p>Former FBI Cyber Division with 15+ years in digital forensics and threat investigation.</p>
+                    <div class="member-certifications">
+                        <span class="cert-badge">CISSP</span>
+                        <span class="cert-badge">GCFA</span>
+                        <span class="cert-badge">EnCE</span>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>Michael Chen</h3>
+                    <p>Lead Digital Forensics Expert</p>
+                    <p>Specialized in ransomware analysis and reverse engineering with 12+ years experience.</p>
+                    <div class="member-certifications">
+                        <span class="cert-badge">GCFE</span>
+                        <span class="cert-badge">GCIH</span>
+                        <span class="cert-badge">CREA</span>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>David Rodriguez</h3>
+                    <p>Threat Intelligence Director</p>
+                    <p>Former military cyber intelligence with expertise in APT attribution and tracking.</p>
+                    <div class="member-certifications">
+                        <span class="cert-badge">GCTI</span>
+                        <span class="cert-badge">CISM</span>
+                        <span class="cert-badge">OSCP</span>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>Jessica Williams</h3>
+                    <p>IR Readiness Specialist</p>
+                    <p>Focuses on tabletop exercises, playbook development, and security preparedness.</p>
+                    <div class="member-certifications">
+                        <span class="cert-badge">CISA</span>
+                        <span class="cert-badge">CRISC</span>
+                        <span class="cert-badge">GSTRT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency CTA -->
+    <section class="emergency-cta" id="contact">
+        <div class="container">
+            <h2>Need Immediate Assistance?</h2>
+            <p>Our incident response team is available 24/7/365 to help contain and remediate security incidents. Don't wait - early containment is critical to minimizing damage.</p>
+            <a href="tel:+1-555-EMERGENCY" class="btn" style="background-color: white; color: var(--urgent);">Call Emergency Response: +1 (555) EMERGENCY</a>
+            
+            <div class="emergency-contact">
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+1 (555) 123-4567</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>ir@cyberbastion.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-comment-alt"></i>
+                    <span>Secure Chat Available</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>CyberBastion IR</h4>
+                    <p>Leading provider of enterprise incident response services with a proven track record of containing sophisticated cyber attacks.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>IR Services</h4>
+                    <ul>
+                        <li><a href="#">Emergency Response</a></li>
+                        <li><a href="#">Digital Forensics</a></li>
+                        <li><a href="#">Ransomware Recovery</a></li>
+                        <li><a href="#">IR Readiness</a></li>
+                        <li><a href="#">Threat Hunting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Incident Response Plan Template</a></li>
+                        <li><a href="#">Ransomware Preparedness Guide</a></li>
+                        <li><a href="#">Tabletop Exercise Kit</a></li>
+                        <li><a href="#">Security Awareness Training</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Security Ave, Cyber City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> ir@cyberbastion.com</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Emergency Response</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 CyberBastion Incident Response Services. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('nav').classList.remove('active');
+            });
+        });
+
+        // Emergency banner close functionality (optional)
+        document.querySelector('.emergency-banner').addEventListener('click', function(e) {
+            if(e.target.classList.contains('fa-times')) {
+                this.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
