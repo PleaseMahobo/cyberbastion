@@ -19,10 +19,9 @@
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#" class="active">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Solutions</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="services">Services</a></li>
+                    <li><a href="solutions">Solutions</a></li>
+                    <li><a href="contact">Contact</a></li>
                 </ul>
             </nav>
             <div class="mobile-menu">
@@ -173,8 +172,8 @@
                 <div class="footer-column">
                     <h3>Contact Us</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Johannesburg, South Africa</li>
-                        <li><i class="fas fa-phone"></i> +27 11 123 4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 32 Sonneblom Street, Alen Grove Kempton Park 1619 South Africa</li>
+                        <li><i class="fas fa-phone"></i> +27 790 38 2171</li>
                         <li><i class="fas fa-envelope"></i> info@cyberbastion.co.za</li>
                         <li><i class="fas fa-globe"></i> www.cyberbastion.co.za</li>
                     </ul>
@@ -185,25 +184,6 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Simple mobile menu toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').style.display = 
-                document.querySelector('nav ul').style.display === 'flex' ? 'none' : 'flex';
-        });
-        
-        // Add scroll effect to header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'var(--primary)';
-                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
-                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
-            }
-        });
     </script>
 </body>
 </html>
