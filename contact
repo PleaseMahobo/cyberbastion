@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | CyberBastion</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: #1a365d;
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4dabf7;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #4dabf7;
+        }
+        
+        /* Main content styles */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a365d;
+            font-size: 2.5rem;
+        }
+        
+        .page-description {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        
+        /* Form container */
+        .form-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Tab styles */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e1e5e9;
+            margin-bottom: 2rem;
+        }
+        
+        .tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: #6c757d;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            color: #1a365d;
+            border-bottom: 3px solid #4dabf7;
+        }
+        
+        .tab:hover:not(.active) {
+            color: #495057;
+            border-bottom: 3px solid #a5d8ff;
+        }
+        
+        /* Form content */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #495057;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #4dabf7;
+            box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.25);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .required::after {
+            content: " *";
+            color: #e03131;
+        }
+        
+        /* Button styles */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-prev {
+            background-color: #e9ecef;
+            color: #495057;
+        }
+        
+        .btn-prev:hover {
+            background-color: #dee2e6;
+        }
+        
+        .btn-next, .btn-submit {
+            background-color: #1a365d;
+            color: white;
+        }
+        
+        .btn-next:hover, .btn-submit:hover {
+            background-color: #152a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Progress indicator */
+        .progress {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0.5rem;
+            font-weight: bold;
+            color: #6c757d;
+            transition: all 0.3s;
+        }
+        
+        .progress-step.active {
+            background-color: #4dabf7;
+            color: white;
+        }
+        
+        .progress-step.completed {
+            background-color: #1a365d;
+            color: white;
+        }
+        
+        /* Footer styles */
+        footer {
+            background-color: #1a365d;
+            color: white;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #4dabf7;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                border-bottom: 1px solid #e1e5e9;
+                border-left: 3px solid transparent;
+            }
+            
+            .tab.active {
+                border-bottom: 1px solid #e1e5e9;
+                border-left: 3px solid #4dabf7;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                margin-bottom: 0.5rem;
+                width: 100%;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            nav li {
+                margin: 0 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">CyberBastion</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Solutions</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#" style="color: #4dabf7;">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">Contact Us</h1>
+        <p class="page-description">Get in touch with our cybersecurity experts. Fill out the form below and we'll get back to you as soon as possible.</p>
+        
+        <div class="form-container">
+            <div class="progress">
+                <div class="progress-step completed">1</div>
+                <div class="progress-step active">2</div>
+                <div class="progress-step">3</div>
+                <div class="progress-step">4</div>
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="contact">Contact Details</div>
+                <div class="tab" data-tab="service">Service Details</div>
+                <div class="tab" data-tab="additional">Additional Info</div>
+                <div class="tab" data-tab="review">Review & Submit</div>
+            </div>
+            
+            <form id="contactForm">
+                <!-- Contact Details Tab -->
+                <div class="tab-content active" id="contact-content">
+                    <div class="form-group">
+                        <label for="fullName" class="required">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="required">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company">Company Name</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    
+                    <div class="button-group">
+                        <div></div> <!-- Empty div for spacing -->
+                        <button type="button" class="btn btn-next" data-next="service">Next</button>
+                    </div>
+                </div>
+                
+                <!-- Service Details Tab -->
+                <div class="tab-content" id="service-content">
+                    <div class="form-group">
+                        <label for="serviceType" class="required">Service Category</label>
+                        <select id="serviceType" name="serviceType" required>
+                            <option value="">Select a service</option>
+                            <option value="security-assessment">Security Assessment</option>
+                            <option value="incident-response">Incident Response</option>
+                            <option value="penetration-testing">Penetration Testing</option>
+                            <option value="security-training">Security Training</option>
+                            <option value="managed-services">Managed Services</option>
+                            <option value="consultation">Consultation</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectDescription" class="required">Project Description</label>
+                        <textarea id="projectDescription" name="projectDescription" placeholder="Please describe your project or security needs in detail..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="urgency">Urgency Level</label>
+                        <select id="urgency" name="urgency">
+                            <option value="low">Low - Planning phase</option>
+                            <option value="medium" selected>Medium - Within next month</option>
+                            <option value="high">High - Immediate attention needed</option>
+                        </select>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="button" class="btn btn-prev" data-prev="contact">Previous</button>
+                        <button type="button" class="btn btn-next" data-next="additional">Next</button>
+                    </div>
+                </div>
+                
+                <!-- Additional Information Tab -->
+                <div class="tab-content" id="additional-content">
+                    <div class="form-group">
+                        <label for="hearAbout">How did you hear about us?</label>
+                        <select id="hearAbout" name="hearAbout">
+                            <option value="">Please select</option>
+                            <option value="search">Search Engine</option>
+                            <option value="referral">Referral</option>
+                            <option value="social">Social Media</option>
+                            <option value="event">Industry Event</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fileUpload">Upload Relevant Documents (optional)</label>
+                        <input type="file" id="fileUpload" name="fileUpload">
+                        <small>Accepted formats: PDF, DOC, DOCX, JPG, PNG (Max 5MB)</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="comments">Any Other Comments</label>
+                        <textarea id="comments" name="comments" placeholder="Any additional information you'd like to share..."></textarea>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="button" class="btn btn-prev" data-prev="service">Previous</button>
+                        <button type="button" class="btn btn-next" data-next="review">Next</button>
+                    </div>
+                </div>
+                
+                <!-- Review & Submit Tab -->
+                <div class="tab-content" id="review-content">
+                    <div class="form-group">
+                        <h3>Please review your information</h3>
+                        <div id="review-summary">
+                            <!-- This will be populated with form data by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="consent" name="consent" required>
+                            I consent to CyberBastion collecting and processing my personal data as described in the <a href="#">Privacy Policy</a>.
+                        </label>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="button" class="btn btn-prev" data-prev="additional">Previous</button>
+                        <button type="submit" class="btn btn-submit">Submit Form</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CyberBastion</h3>
+                <p>Your trusted partner in cybersecurity solutions. We provide comprehensive protection for your digital assets.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@cyberbastion.co.za</p>
+                <p>Phone: +27 12 345 6789</p>
+                <p>Address: 123 Security Street, Pretoria, South Africa</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#" style="color: #a5d8ff;">Services</a></p>
+                <p><a href="#" style="color: #a5d8ff;">About Us</a></p>
+                <p><a href="#" style="color: #a5d8ff;">Blog</a></p>
+                <p><a href="#" style="color: #a5d8ff;">Privacy Policy</a></p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 CyberBastion. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab navigation
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const progressSteps = document.querySelectorAll('.progress-step');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Update tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update tab contents
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === `${tabId}-content`) {
+                            content.classList.add('active');
+                        }
+                    });
+                    
+                    // Update progress steps
+                    updateProgress(tabId);
+                });
+            });
+            
+            // Next button functionality
+            const nextButtons = document.querySelectorAll('.btn-next');
+            nextButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const nextTab = this.getAttribute('data-next');
+                    
+                    // Validate current tab before proceeding
+                    if (validateCurrentTab()) {
+                        // Update tabs
+                        tabs.forEach(t => t.classList.remove('active'));
+                        document.querySelector(`.tab[data-tab="${nextTab}"]`).classList.add('active');
+                        
+                        // Update tab contents
+                        tabContents.forEach(content => {
+                            content.classList.remove('active');
+                            if (content.id === `${nextTab}-content`) {
+                                content.classList.add('active');
+                            }
+                        });
+                        
+                        // Update progress steps
+                        updateProgress(nextTab);
+                        
+                        // If moving to review tab, populate the review summary
+                        if (nextTab === 'review') {
+                            populateReviewSummary();
+                        }
+                    }
+                });
+            });
+            
+            // Previous button functionality
+            const prevButtons = document.querySelectorAll('.btn-prev');
+            prevButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const prevTab = this.getAttribute('data-prev');
+                    
+                    // Update tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    document.querySelector(`.tab[data-tab="${prevTab}"]`).classList.add('active');
+                    
+                    // Update tab contents
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === `${prevTab}-content`) {
+                            content.classList.add('active');
+                        }
+                    });
+                    
+                    // Update progress steps
+                    updateProgress(prevTab);
+                });
+            });
+            
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate the consent checkbox
+                const consent = document.getElementById('consent');
+                if (!consent.checked) {
+                    alert('Please consent to our Privacy Policy before submitting the form.');
+                    return;
+                }
+                
+                // In a real implementation, you would send the form data to a server
+                // For this demo, we'll just show a success message
+                alert('Thank you for your submission! We will contact you soon.');
+                contactForm.reset();
+                
+                // Reset to first tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                document.querySelector('.tab[data-tab="contact"]').classList.add('active');
+                document.getElementById('contact-content').classList.add('active');
+                
+                // Reset progress
+                updateProgress('contact');
+            });
+            
+            // Update progress steps based on current tab
+            function updateProgress(currentTab) {
+                const tabOrder = ['contact', 'service', 'additional', 'review'];
+                const currentIndex = tabOrder.indexOf(currentTab);
+                
+                progressSteps.forEach((step, index) => {
+                    step.classList.remove('active', 'completed');
+                    
+                    if (index < currentIndex) {
+                        step.classList.add('completed');
+                    } else if (index === currentIndex) {
+                        step.classList.add('active');
+                    }
+                });
+            }
+            
+            // Validate current tab before proceeding
+            function validateCurrentTab() {
+                const activeTab = document.querySelector('.tab-content.active');
+                const requiredFields = activeTab.querySelectorAll('[required]');
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.style.borderColor = '#e03131';
+                        
+                        // Add error message if not already present
+                        if (!field.nextElementSibling || !field.nextElementSibling.classList.contains('error-message')) {
+                            const errorMsg = document.createElement('div');
+                            errorMsg.classList.add('error-message');
+                            errorMsg.style.color = '#e03131';
+                            errorMsg.style.fontSize = '0.875rem';
+                            errorMsg.style.marginTop = '0.25rem';
+                            errorMsg.textContent = 'This field is required';
+                            field.parentNode.appendChild(errorMsg);
+                        }
+                    } else {
+                        field.style.borderColor = '#ced4da';
+                        
+                        // Remove error message if present
+                        if (field.nextElementSibling && field.nextElementSibling.classList.contains('error-message')) {
+                            field.parentNode.removeChild(field.nextElementSibling);
+                        }
+                    }
+                });
+                
+                if (!isValid) {
+                    alert('Please fill in all required fields before proceeding.');
+                }
+                
+                return isValid;
+            }
+            
+            // Populate review summary
+            function populateReviewSummary() {
+                const reviewSummary = document.getElementById('review-summary');
+                const formData = new FormData(contactForm);
+                let summaryHTML = '';
+                
+                // Contact details
+                summaryHTML += '<h4>Contact Details</h4>';
+                summaryHTML += `<p><strong>Name:</strong> ${document.getElementById('fullName').value}</p>`;
+                summaryHTML += `<p><strong>Email:</strong> ${document.getElementById('email').value}</p>`;
+                summaryHTML += `<p><strong>Phone:</strong> ${document.getElementById('phone').value || 'Not provided'}</p>`;
+                summaryHTML += `<p><strong>Company:</strong> ${document.getElementById('company').value || 'Not provided'}</p>`;
+                
+                // Service details
+                summaryHTML += '<h4>Service Details</h4>';
+                const serviceType = document.getElementById('serviceType');
+                summaryHTML += `<p><strong>Service Category:</strong> ${serviceType.options[serviceType.selectedIndex].text}</p>`;
+                summaryHTML += `<p><strong>Project Description:</strong> ${document.getElementById('projectDescription').value}</p>`;
+                const urgency = document.getElementById('urgency');
+                summaryHTML += `<p><strong>Urgency:</strong> ${urgency.options[urgency.selectedIndex].text}</p>`;
+                
+                // Additional info
+                summaryHTML += '<h4>Additional Information</h4>';
+                const hearAbout = document.getElementById('hearAbout');
+                summaryHTML += `<p><strong>How you heard about us:</strong> ${hearAbout.options[hearAbout.selectedIndex].text || 'Not provided'}</p>`;
+                summaryHTML += `<p><strong>Additional Comments:</strong> ${document.getElementById('comments').value || 'None'}</p>`;
+                
+                reviewSummary.innerHTML = summaryHTML;
+            }
+            
+            // Initialize progress
+            updateProgress('contact');
+        });
+    </script>
+</body>
+</html>
