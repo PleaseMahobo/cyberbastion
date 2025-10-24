@@ -392,11 +392,8 @@
                 <div class="tab" data-tab="additional">Additional Info</div>
                 <div class="tab" data-tab="review">Review & Submit</div>
             </div>
-            <form 
-				action="https://formspree.io/f/xnngedrw" 
-				method="POST"
-				>
-            <form id="contactForm">
+			
+            <form id="contactForm" action="https://formspree.io/f/xnngedrw" method="POST">
                 <!-- Contact Details Tab -->
                 <div class="tab-content active" id="contact-content">
                     <div class="form-group">
@@ -519,8 +516,7 @@
                     </div>
                 </div>
             </form>
-            </form>
-			
+           			
             <div class="success-message" id="successMessage">
                 <h3>Thank You!</h3>
                 <p>Your message has been submitted successfully. We will contact you soon.</p>
@@ -604,7 +600,8 @@
             // Form submission
             const contactForm = document.getElementById('contactForm');
             contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
+                // Remove the e.preventDefault() line to allow Formspree to work
+                // e.preventDefault();
                 
                 // Validate the consent checkbox
                 const consent = document.getElementById('consent');
@@ -612,21 +609,15 @@
                 
                 if (!consent.checked) {
                     consentError.style.display = 'block';
+                    e.preventDefault(); // Only prevent if validation fails
                     return;
                 } else {
                     consentError.style.display = 'none';
                 }
                 
-                // In a real implementation, you would send the form data to a server
-                // For this demo, we'll just show a success message
+                // If validation passes, Formspree will handle the submission
+                // You can keep your success message logic if you want
                 document.getElementById('successMessage').style.display = 'block';
-                
-                // Reset form after 3 seconds
-                setTimeout(function() {
-                    contactForm.reset();
-                    document.getElementById('successMessage').style.display = 'none';
-                    switchTab('contact');
-                }, 3000);
             });
             
             // Switch tab function
