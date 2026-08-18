@@ -1,0 +1,95 @@
+/* Cyber Bastion — refined editorial paragraph treatment */
+.hero-lead,
+.section-heading > p,
+.service-card p,
+.bhudi-copy > p:not(.section-kicker),
+.threat-copy > p:not(.section-kicker),
+.cta-panel > div:first-child > p:last-child {
+    max-width: 68ch;
+    font-size: 1rem;
+    line-height: 1.85;
+    letter-spacing: .008em;
+    text-wrap: pretty;
+}
+
+.hero-lead {
+    max-width: 620px;
+    margin-top: 26px;
+    color: #d5deea;
+    font-size: 1.08rem;
+    line-height: 1.9;
+    letter-spacing: .004em;
+}
+
+.section-heading > p,
+.threat-copy > p:not(.section-kicker) {
+    position: relative;
+    padding-left: 20px;
+    color: #526174;
+    font-size: .98rem;
+    line-height: 1.9;
+}
+
+.section-heading > p::before,
+.threat-copy > p:not(.section-kicker)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .35em;
+    bottom: .35em;
+    width: 2px;
+    border-radius: 99px;
+    background: linear-gradient(to bottom, #6366f1, #22d3ee);
+    opacity: .8;
+}
+
+.service-card p {
+    margin-top: 10px;
+    color: #59697d;
+    font-size: .86rem;
+    line-height: 1.8;
+}
+
+.bhudi-copy > p:not(.section-kicker) {
+    margin-top: 21px;
+    color: #aab7c8;
+    font-size: .98rem;
+    line-height: 1.9;
+}
+
+.cta-panel > div:first-child > p:last-child {
+    margin-top: 16px;
+    color: #a5b2c3;
+    font-size: .92rem;
+    line-height: 1.8;
+}
+
+.value-grid p {
+    margin-top: 4px;
+    color: #66758a;
+    font-size: .74rem;
+    line-height: 1.65;
+}
+
+.footer-about > p {
+    color: #8291a5;
+    font-size: .77rem;
+    line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+    .hero-lead,
+    .section-heading > p,
+    .service-card p,
+    .bhudi-copy > p:not(.section-kicker),
+    .threat-copy > p:not(.section-kicker),
+    .cta-panel > div:first-child > p:last-child {
+        font-size: .9rem;
+        line-height: 1.8;
+    }
+
+    .section-heading > p,
+    .threat-copy > p:not(.section-kicker) {
+        padding-left: 15px;
+    }
+}
