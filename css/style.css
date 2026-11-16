@@ -253,3 +253,215 @@ footer { color: #94a3b8; background: #060d18; }
         display: none;
     }
 }
+
+
+/* Contact page target layout */
+.contact-services {
+    padding-top: 55px;
+    padding-bottom: 52px;
+    background: #f8fafc;
+}
+
+.contact-services .section-heading {
+    grid-template-columns: 1fr .65fr;
+    margin-bottom: 22px;
+}
+
+.contact-services .section-heading h2 {
+    font-size: 1.7rem;
+}
+
+.contact-services .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.contact-services .service-card {
+    min-height: 135px;
+    padding: 18px;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.contact-services .service-card i {
+    color: #6366f1;
+    font-size: .85rem;
+}
+
+.contact-services .service-card h3 {
+    margin-top: 9px;
+    font-size: .8rem;
+}
+
+.contact-services .service-card p {
+    margin-top: 5px;
+    font-size: .64rem;
+    line-height: 1.5;
+}
+
+.contact-services .card-link {
+    margin-top: 9px;
+    font-size: .6rem;
+}
+
+.contact-details-section {
+    padding: 18px 0 48px;
+    background: #fff;
+}
+
+.contact-details-section > .container {
+    display: grid;
+    grid-template-columns: .95fr 1.25fr;
+    align-items: start;
+    gap: 18px;
+}
+
+.contact-details-section .threat-content {
+    min-width: 0;
+}
+
+.contact-details-section .eyebrow {
+    font-size: .58rem;
+    padding: 5px 9px;
+}
+
+.contact-details-section .threat-content h2 {
+    margin-top: 8px;
+    font-size: 1.25rem;
+}
+
+.contact-details-section .threat-content > p {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: .65rem;
+    line-height: 1.55;
+}
+
+.contact-details-list {
+    display: grid;
+    gap: 7px;
+    margin-top: 13px;
+    list-style: none;
+}
+
+.contact-details-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+}
+
+.contact-details-list li > i {
+    display: grid;
+    flex: 0 0 25px;
+    width: 25px;
+    height: 25px;
+    place-items: center;
+    border-radius: 7px;
+    color: #6366f1;
+    background: #eef2ff;
+    font-size: .62rem;
+}
+
+.contact-details-list li span:last-child {
+    min-width: 0;
+    color: var(--slate);
+    font-size: .62rem;
+    line-height: 1.45;
+}
+
+.contact-details-list b {
+    display: inline-block;
+    min-width: 52px;
+    margin-right: 8px;
+    color: #475569;
+    font-size: .58rem;
+}
+
+.contact-details-list a {
+    color: #334155;
+}
+
+.contact-details-list a:hover {
+    color: #4f46e5;
+}
+
+.contact-details-section .threat-visualization {
+    min-width: 0;
+}
+
+.contact-details-section .bhudi-panel {
+    padding: 14px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(15,23,42,.08);
+}
+
+.contact-details-section .bhudi-panel > span {
+    display: inline-block;
+    font-size: .55rem;
+}
+
+.contact-details-section .bhudi-panel > strong {
+    display: inline-block;
+    margin: 0 0 0 7px;
+    color: #f8fafc;
+    font-size: .76rem;
+    vertical-align: middle;
+}
+
+.contact-details-section .bhudi-panel form {
+    display: grid !important;
+    gap: 7px !important;
+    margin-top: 10px;
+}
+
+.contact-details-section .bhudi-panel input,
+.contact-details-section .bhudi-panel select,
+.contact-details-section .bhudi-panel textarea {
+    width: 100%;
+    padding: 8px 10px !important;
+    border-radius: 7px !important;
+    font: inherit;
+    font-size: .61rem;
+    line-height: 1.2;
+}
+
+.contact-details-section .bhudi-panel textarea {
+    min-height: 62px;
+    resize: vertical;
+}
+
+.contact-details-section .bhudi-panel .btn {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 7px;
+    font-size: .61rem;
+}
+
+@media (max-width: 900px) {
+    .contact-services .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-details-section > .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .contact-services .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-services .section-heading {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-details-list b {
+        min-width: 48px;
+    }
+}
