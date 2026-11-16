@@ -465,3 +465,18 @@ footer { color: #94a3b8; background: #060d18; }
         min-width: 48px;
     }
 }
+
+
+/* Packages + free health check */
+.packages { padding: 58px 0; background: #f8fafc; }
+.package-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.package-card { padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: 0 8px 24px rgba(15,23,42,.05); }
+.package-badge { display: inline-block; padding: 5px 9px; border-radius: 999px; color: #4f46e5; background: #eef2ff; font-size: .56rem; font-weight: 800; letter-spacing: .1em; }
+.package-card h3 { margin-top: 12px; font-size: 1rem; }
+.package-card p { margin-top: 7px; color: var(--muted); font-size: .68rem; line-height: 1.55; }
+.package-card ul { margin: 14px 0 18px; padding-left: 17px; color: var(--slate); font-size: .65rem; line-height: 1.8; }
+.health-check-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 900px; margin-top: 22px; }
+.health-check-form input, .health-check-form select, .health-check-form textarea { width: 100%; padding: 11px 12px; border: 1px solid #334155; border-radius: 8px; background: #0f172a; color: #fff; font: inherit; font-size: .68rem; }
+.health-check-form textarea { grid-column: 1 / -1; min-height: 85px; }
+.health-check-form .btn { grid-column: 1 / -1; justify-self: start; }
+@media (max-width: 800px) { .package-grid { grid-template-columns: 1fr; } .health-check-form { grid-template-columns: 1fr; } .health-check-form textarea, .health-check-form .btn { grid-column: auto; } }
