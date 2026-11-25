@@ -10,11 +10,25 @@ The portfolio focuses on Application Security, Cloud Security, DevSecOps, Identi
 
 ### Bhudi Online
 
-A production-oriented full-stack platform used as an application-security and DevSecOps case study.
+A full-stack platform used as an application-security and DevSecOps case study.
 
 Evidence includes authentication and authorization, MFA workflows, API security, identity reconciliation, PostgreSQL/Supabase integration, automated regression testing, GitHub Actions CI/CD, containerized backend delivery, and production troubleshooting/validation.
 
 Repository: https://github.com/PleaseMahobo/Bhudi-Online
+
+### Cybersecurity Labs
+
+A structured set of reproducible exercise blueprints and evidence-led reports covering:
+
+- Linux host investigation and triage
+- Authenticated API security assessment
+- OWASP web application security review
+- MITRE ATT&CK technique mapping
+- Incident response tabletop exercises
+
+**[Open the Cybersecurity Labs portfolio](https://github.com/PleaseMahobo/cyberbastion/tree/main/cybersecurity-labs)**
+
+The lab catalogue clearly distinguishes planned exercises from completed, evidence-backed work. It includes a reusable report template and safe-testing guidance.
 
 ## Security methodology
 
